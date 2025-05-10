@@ -1,3 +1,10 @@
 spring:
   application:
     name: bulk-data-watcher
+
+scryfall:
+  base-folder: C:/Users/Rez/Desktop/mtgBulkData
+  bulk:
+    exchange: scryfall.bulk.exchange
+    routing-key: scryfall.bulk.route
+    queue: scryfall.bulk.queue
