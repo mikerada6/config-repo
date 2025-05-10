@@ -1,0 +1,24 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: # Minimal exposure for production
+          - health
+          - info
+          - prometheus # If you use Prometheus in prod
+  endpoint:
+    prometheus:
+      enabled: true # Or false if not used in prod
+
+app:
+  tracing:
+    sampling:
+      probability: 0.01 # Low sampling for production, adjust as needed
+
+logging:
+  level:
+    root: WARN # Less verbose in production
+    # org.rezatron.bulkdatawatcher: INFO # Or WARN
+
+scryfall:
+  base-folder: /srv/bulk-data-watcher/data/prod

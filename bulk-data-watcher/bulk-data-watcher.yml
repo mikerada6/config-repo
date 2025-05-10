@@ -1,10 +1,43 @@
 spring:
   application:
-    name: bulk-data-watcher
+    name: bulk-data-watcher # Defines the application name
+  rabbitmq:
+    listener:
+      simple:
+        observation:
+          enabled: true # Default observation setting
 
-scryfall:
-  base-folder: C:/Users/Rez/Desktop/mtgBulkData
-  bulk:
-    exchange: scryfall.bulk.exchange
-    routing-key: scryfall.bulk.route
-    queue: scryfall.bulk.queue
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+management:
+  info:
+    git:
+      mode: simple
+    env:
+      enabled: false # Usually disabled for security unless specifically needed
+  # Default endpoint exposure (can be overridden by profiles)
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+  endpoint:
+    prometheus:
+      enabled: false # Disabled by default, enabled by profiles that need it
+
+app:
+  version: "@project.version@" # Resolved at build time
+  tracing:
+    sampling:
+      probability: 0.1 # Default sampling rate (override in dev)
+
+# Default logging levels (override in profiles)
+logging:
+  level:
+    root: INFO # Default root level
+    com.github.loki4j: WARN
+    io.micrometer.observation: INFO
+    # org.rezatron.bulkdatawatcher: INFO # Your application's package

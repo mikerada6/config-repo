@@ -1,0 +1,26 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+          - prometheus
+          - metrics
+          - loggers
+  endpoint:
+    prometheus:
+      enabled: true
+
+app:
+  tracing:
+    sampling:
+      probability: 0.5 # Higher sampling for integration testing
+
+logging:
+  level:
+    root: INFO
+    # org.rezatron.bulkdatawatcher: INFO
+
+scryfall:
+  base-folder: /srv/bulk-data-watcher/data/int

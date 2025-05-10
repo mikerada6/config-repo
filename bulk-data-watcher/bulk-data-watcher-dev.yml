@@ -1,0 +1,35 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: # Expose more in dev
+          - health
+          - info
+          - prometheus
+          - env
+          - metrics
+          - loggers
+          - configprops
+          - beans
+          - mappings
+  endpoint:
+    prometheus:
+      enabled: true
+
+app:
+  tracing:
+    sampling:
+      probability: 1.0 # Full tracing in dev
+
+logging:
+  level:
+    root: INFO
+    # org.rezatron.bulkdatawatcher: DEBUG # More verbose for your app in dev
+    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG # If using JPA/Hibernate
+
+# For a deployed 'dev' environment server.
+# Local developers should override this locally (e.g., using spring.config.import=optional:file:./local-dev.yml)
+# or environment variables, NOT by modifying this shared file with their personal paths.
+scryfall:
+  base-folder: /srv/bulk-data-watcher/data/dev
